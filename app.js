@@ -73,13 +73,15 @@ const elements = {
   btnCancelBudgetModal: document.getElementById('btnCancelBudgetModal'),
   btnSaveBudgetModal: document.getElementById('btnSaveBudgetModal'),
   inputBudgetVal: document.getElementById('inputBudgetVal'),
-  
   // Theme & Portability
   themeToggleBtn: document.getElementById('themeToggleBtn'),
   currentDateText: document.getElementById('currentDateText'),
   btnExportCSV: document.getElementById('btnExportCSV'),
   csvFileInput: document.getElementById('csvFileInput'),
-  toastContainer: document.getElementById('toastContainer')
+  toastContainer: document.getElementById('toastContainer'),
+  
+  // Scroll to top
+  scrollTopBtn: document.getElementById('scrollTopBtn')
 };
 
 // Chart instances
@@ -98,7 +100,9 @@ function init() {
 function setDateDisplay() {
   const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
   const today = new Date();
-  elements.currentDateText.textContent = today.toLocaleDateString('en-US', options);
+  const dateStr = today.toLocaleDateString('en-IN', options);
+  
+  if (elements.currentDateText) elements.currentDateText.textContent = dateStr;
   
   // Also set default date on form to today
   const year = today.getFullYear();
@@ -171,15 +175,31 @@ function applyTheme() {
 
 // Event Listeners Setup
 function setupEventListeners() {
-  // Theme Toggle
-  elements.themeToggleBtn.addEventListener('click', () => {
+  // ── Theme Toggle ──────────────────────────────────────
+  const handleThemeToggle = () => {
     state.theme = state.theme === 'dark' ? 'light' : 'dark';
     saveState();
     applyTheme();
     showToast(`Switched to ${state.theme} mode`, 'success');
-  });
+  };
+  if (elements.themeToggleBtn) elements.themeToggleBtn.addEventListener('click', handleThemeToggle);
 
-  // Modal actions
+  // ── Scroll-to-Top Button ──────────────────────────────
+  if (elements.scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        elements.scrollTopBtn.classList.add('visible');
+      } else {
+        elements.scrollTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    elements.scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ── Modal actions ─────────────────────────────────────
   elements.btnEditBudget.addEventListener('click', () => {
     elements.inputBudgetVal.value = state.monthlyBudget;
     elements.budgetModal.classList.add('active');
@@ -206,7 +226,7 @@ function setupEventListeners() {
     }
   });
 
-  // Expense Form Actions
+  // ── Expense Form Actions ──────────────────────────────
   elements.expenseForm.addEventListener('submit', (e) => {
     e.preventDefault();
     handleFormSubmit();
@@ -214,7 +234,7 @@ function setupEventListeners() {
 
   elements.btnCancelEdit.addEventListener('click', resetForm);
 
-  // Filters & Search
+  // ── Filters & Search ──────────────────────────────────
   elements.searchTransactions.addEventListener('input', (e) => {
     state.filters.search = e.target.value.trim();
     render();
@@ -235,11 +255,11 @@ function setupEventListeners() {
     }
   });
 
-  // CSV Export/Import
+  // ── CSV Export/Import (Desktop) ───────────────────────
   elements.btnExportCSV.addEventListener('click', exportToCSV);
   elements.csvFileInput.addEventListener('change', importFromCSV);
 
-  // Visualization Tabs Switching
+  // ── Visualization Tabs Switching ──────────────────────
   const tabBtns = [elements.tabCategory, elements.tabTrend];
   tabBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -258,7 +278,7 @@ function setupEventListeners() {
     });
   });
 
-  // Re-render charts on window resize to ensure responsiveness of legend positions and sizes
+  // ── Re-render charts on window resize ─────────────────
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
