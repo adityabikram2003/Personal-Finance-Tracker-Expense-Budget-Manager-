@@ -1,0 +1,52 @@
+Internship Task: Personal Finance Tracker Web App
+Task Name:
+Personal Finance Tracker (Expense & Budget Manager)
+Duration:
+15 Days
+Task Description:
+Design and develop a responsive Personal Finance Tracker web application that allows users to
+manage daily expenses, set budgets, and visualize spending patterns. The application should focus
+on usability, interactivity, and clean UI using HTML, CSS, and JavaScript.
+Objectives:
+• Build a practical, real-world web application.
+• Implement dynamic UI updates using JavaScript.
+• Practice data handling using browser storage (LocalStorage).
+• Ensure responsive and user-friendly design.
+Features to Implement:
+1. Page Layout:- Clean and modern dashboard layout.- Sections: Header, Summary Cards, Expense Form, Expense List, Charts Section.
+2. Expense Management:- Add new expenses (Title, Amount, Category, Date).- Display list of expenses dynamically.- Edit and delete functionality for each entry.
+3. Budget Management:- Allow user to set a monthly budget.- Show remaining budget dynamically.
+4. Data Persistence:- Store all data using LocalStorage.- Ensure data remains after page refresh.
+5. Category Filtering:- Filter expenses by category (Food, Travel, Shopping, etc.).
+6. Search Functionality:- Search expenses by name or category.
+7. Basic Data Visualization:- Create simple charts (using JS or chart library) to show spending distribution.
+8. Responsive Design:- Fully responsive for mobile, tablet, and desktop.
+9. Performance Optimization:- Optimize DOM updates.- Use efficient event handling.
+10. Optional Features:- Dark/Light mode toggle.- Export data as CSV.- Add animations or transitions.
+Technology Stack:
+Frontend:- HTML5- CSS3 / Tailwind / Bootstrap- JavaScript (ES6+)
+Version Control:
+• Create a GitHub repository.
+• Maintain proper commits with meaningful messages.
+• Push final code regularly.
+Presentation:
+• Deploy using GitHub Pages / Netlify / Vercel.
+• Prepare a 5–10 minute demo including:- Project overview- Features demonstration- Challenges faced- Future enhancements
+Deliverables:
+1. Fully functional Finance Tracker Web App
+2. GitHub repository link
+3. Live deployed link
+4. README file including:- Project overview- Setup instructions- Technologies used
+Task Evaluation Criteria:
+1. UI/UX & Design (25%)
+2. Functionality (30%)
+3. Code Quality (20%)
+4. Data Handling (15%)
+5. GitHub & Presentation (10%)
+Tools and Resources:
+• Code Editors: VS Code, Sublime Text
+• Version Control: Git, GitHub
+• Optional Libraries: Chart.js
+• Deployment: Netlify, Vercel, GitHub Pages
+Deadline:
+The task must be completed and submitted within 15 days from the date of assignment.
